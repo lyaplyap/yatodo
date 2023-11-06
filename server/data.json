@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "title": "Сверстать веб-приложение",
+        "completed": false
+    },
+    {
+        "id": 1,
+        "title": "Сделать задачки на JavaScript",
+        "completed": true
+    },
+    {
+        "id": 2,
+        "title": "Подключить API",
+        "completed": false
+    }
+]

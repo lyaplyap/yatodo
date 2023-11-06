@@ -1,13 +1,18 @@
-import express, { Express, Request, Response } from 'express';
-
+import app from './app';
 import CONFIG from './config';
 
-const app: Express = express();
+// App start
+const start = async () => {
+    try {
+        app.listen(CONFIG.PORT, () => console.log(`[server]: App is running at http://localhost:${CONFIG.PORT}`));
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            console.log(`[server]: ${error.message}`);
+        }
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Express + TypeScript Server');
-});
-
-app.listen(CONFIG.PORT, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${CONFIG.PORT}`);
-});
+        process.exit(1);
+    }
+};
+  
+start();
