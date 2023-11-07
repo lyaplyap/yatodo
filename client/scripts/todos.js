@@ -1,3 +1,62 @@
+// API
+const API_URL = 'https://yatodo-api.vercel.app/api/todos';
+
+const fetchTodos = async () => {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw data;
+    }
+
+    return data;
+};
+
+const addTodoToBackend = async (title) => {
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ title })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw data;
+    }
+
+    return data;
+};
+
+const removeTodoFromBackend = async (id) => {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw data;
+    }
+};
+
+const completeTodo = async (id) => {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'PATCH'
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw data;
+    }
+
+    return data;
+};
+//
+
 // Mocks
 const TODOS_MOCK = [
     {
@@ -85,7 +144,7 @@ const getTodoNodes = (todos) => {
     return nodes;
 };
 
-const insertTodos = (todos) => {
+const insertTodos = async (todos) => {
     const todosNode = document.body.querySelector('.todo-list__list');
   
     if (todosNode) {
@@ -93,30 +152,41 @@ const insertTodos = (todos) => {
     }
 };
   
-document.addEventListener('DOMContentLoaded', () => insertTodos(TODOS_MOCK));
+document.addEventListener('DOMContentLoaded', async () => {
+    const todos = await fetchTodos();
+
+    insertTodos(todos);
+});
 
 // Business logic
-const toggleTodo = (event) => {
+const toggleTodo = async (event) => {
     const node = getElementByTag(event.currentTarget, 'li');
 
     if (!node) return;
 
+    const id = node.getAttribute('data-id');
     const title = node.querySelector('.todo-list__todo-title').innerText;
     const completed = !node.classList.contains('todo-list__todo_completed');
 
     node.classList.toggle('todo-list__todo_completed');
-    node.innerHTML = getTodoHTML({ title, completed })
+    node.innerHTML = getTodoHTML({ title, completed });
+    
+    await completeTodo(id);
 };
 
-const removeTodo = (event) => {
+const removeTodo = async (event) => {
     const node = getElementByTag(event.currentTarget, 'li');
 
     if (!node) return;
 
+    const id = node.getAttribute('data-id');
+
     node.parentNode.removeChild(node);
+
+    await removeTodoFromBackend(id);
 };
 
-const addTodo = (event) => {
+const addTodo = async (event) => {
     if (event.code !== 'Enter') return;
 
     const { value } = event.currentTarget;
@@ -125,12 +195,8 @@ const addTodo = (event) => {
 
     const todos = document.body.querySelector('.todo-list__list');
 
-    const todo = {
-        title: value,
-        id: todos.childNodes.length,
-        completed: false
-    };
+    const todo = await addTodoToBackend(value);
 
     todos.appendChild(getTodoNode(todo));
-    event.currentTarget.value = '';
+    event.target.value = '';
 };
