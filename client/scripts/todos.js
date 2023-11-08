@@ -1,4 +1,4 @@
-// API
+/* API */
 const API_URL = 'https://yatodo-api.vercel.app/api/todos';
 
 const fetchTodos = async () => {
@@ -55,28 +55,8 @@ const completeTodo = async (id) => {
 
     return data;
 };
-//
 
-// Mocks
-const TODOS_MOCK = [
-    {
-        id: 0,
-        title: 'Сверстать веб-приложение',
-        completed: false
-    },
-    {
-        id: 1,
-        title: 'Сделать задачки на JavaScript',
-        completed: true
-    },
-    {
-        id: 2,
-        title: 'Подключить API',
-        completed: false
-    }
-];
-
-// Utils
+/* Utils */
 const getElementByTag = (element, parentTag) => {
     let currentElement = element;
 
@@ -89,7 +69,7 @@ const getElementByTag = (element, parentTag) => {
     return currentElement;
 };
 
-// HTML builders
+/* HTML builders */
 const getCheckboxHTML = (completed) => {
     if (completed) {
         return `
@@ -120,7 +100,7 @@ const getTodoHTML = ({ title, completed }) => {
     `;
 };
 
-// Initialization
+/* Initialization */
 const getTodoNode = ({ id, title, completed }) => {
     const node = document.createElement('li');
         
@@ -158,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     insertTodos(todos);
 });
 
-// Business logic
+/* Business logic */
 const toggleTodo = async (event) => {
     const node = getElementByTag(event.currentTarget, 'li');
 
