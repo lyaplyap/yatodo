@@ -1,0 +1,43 @@
+.todo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    gap: 15px;
+    border-radius: 18px;
+    background: var(--background-color-default);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.completed {
+    background: var(--background-color-completed);
+}
+
+.completed > .content > button {
+    background-color: var(--icon-color-completed);
+}
+
+.completed > .content > span {
+    font-weight: var(--font-weight-light);
+    color: var(--color-completed);
+}
+
+.removeButton {
+    color: #FFF;
+    background-color: var(--color-alert);
+    transition: all 0.4s ease-out;
+}
+
+.removeButton:active {
+    transform: scale(0.6);
+}
+
+.todo:not(:hover) .removeButton {
+    display: none;
+}

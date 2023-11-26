@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    gap: 15px;
+    padding: 15px 15px 10px 15px;
+}
+
+.input {
+    all: unset;
+    border-bottom: 2px solid var(--background-color-default);
+    width: 100%;
+    color: rgba(53, 56, 62, 0.50);
+    font-family: Raleway;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.input::placeholder {
+    opacity: 0.2;
+}
