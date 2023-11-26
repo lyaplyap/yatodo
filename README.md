@@ -2,5 +2,14 @@
 
 Очередная реализация todo-списка для погружения в веб-разработку
 
+### Структура репозитория
+
+```text
+.
+├── client - фронтенд на HTML, CSS, JS
+├── react - фронтенд на React
+└── server - бэкенд
+```
+
 ### Полезные ссылки:
 * [Исходный макет](https://www.figma.com/file/SMBkxduzceJOQ9cJK9h0Os/Simple-ToDo%2FTask-List-(Community)?node-id=2%3A459&mode=dev)
