@@ -6,7 +6,8 @@
 
 ```text
 .
-├── client - фронтенд на HTML, CSS, JS
+├── client - фронтенд на HTML, CSS, JavaScript
+├── client-ts - фронтенд на HTML, CSS, TypeScript 
 ├── react - фронтенд на React
 └── server - бэкенд
 ```
